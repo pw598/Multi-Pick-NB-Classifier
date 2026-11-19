@@ -1,0 +1,115 @@
+{
+  "created": "20261119_150929",
+  "grid_search": true,
+  "cv": {
+    "cv_type": "oof",
+    "n_folds": 3,
+    "fold_method": "id_hash",
+    "fold_key_col": "ID",
+    "fold_seed": 0,
+    "n_repeats": 5,
+    "test_size": 0.2,
+    "holdout_seed": 42
+  },
+  "columns": {
+    "text_col": "FullDesc",
+    "cleaned_col": "CleanDesc",
+    "level_columns": [
+      "Level 1 ID",
+      "Level 2 ID",
+      "Level 3 ID",
+      "Level 4 ID"
+    ],
+    "name_columns": [
+      "Level 1 Name",
+      "Level 2 Name",
+      "Level 3 Name",
+      "Level 4 Name"
+    ],
+    "id_cols": [
+      "ID",
+      "Vallen ID"
+    ]
+  },
+  "candidates": [
+    {
+      "vectorizer_kind": "tfidf",
+      "max_features": null,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "min_df": 2,
+      "max_df": 0.95,
+      "stop_words": "english",
+      "sublinear_tf": true,
+      "binary": true,
+      "norm": "l2",
+      "use_idf": false,
+      "ordered_bigrams": true,
+      "token_pattern": "whitespace",
+      "alpha": 0.001,
+      "fit_prior": true,
+      "prediction_mode": "conditional",
+      "rare_path_threshold": 5
+    }
+  ],
+  "n_rows": 607389,
+  "sample_frac": null,
+  "sample_seed": null,
+  "data_source": {
+    "type": "sql",
+    "query_name": "labeled_items",
+    "query_sha256": "8cb3479c12494276",
+    "query_text": "with\n    base as (\n        select s.id as `ID`,\n               s.erp_cono as `Cono`,\n               upper(s.erp_product_number) as `Vallen ID`,\n               upper(replace(i.descrip, ';', ' ')) as `FullDesc`,\n               s.category_l4_id,\n               upper(s.global_vendor_number) as `Global Vendno`,\n               upper(i.prodcat) as `ICSP Prodcat`,\n               upper(i.zzunspsc) as `UNSPSC`,\n               concat(s.erp_cono, '_',  upper(s.global_vendor_number), '_', upper(w.prodline)) as `Prodline`\n        from prd_bronze.stibo_ftp.sku s\n        inner join prd_bronze.openedge.icsp i\n        on s.erp_product_number = i.prod\n        left join prd_bronze.openedge.icsw w\n        on s.erp_product_number = w.prod\n           and w.st_row_current = 1\n           and w.cono = 1\n           and upper(w.whse) in ('ZDAT', 'FC')\n        where s.st_row_current = 1\n            and s.category_l4_id is not null\n            and i.st_row_current = 1\n            and i.cono in (1, 55)\n            and i.descrip is not null\n    ),\n\n    hierarchy as (\n        select\n            l1.id   as `Level 1 ID`,\n            l1.name as `Level 1 Name`,\n            l2.id   as `Level 2 ID`,\n            l2.name as `Level 2 Name`,\n            l3.id   as `Level 3 ID`,\n            l3.name as `Level 3 Name`,\n            l4.id   as `Level 4 ID`,\n            l4.name as `Level 4 Name`\n        from prd_bronze.stibo_ftp.hierarchy l1\n        left join prd_bronze.stibo_ftp.hierarchy l2\n            on l2.parent_id = l1.id and l2.level = 2 and l2.st_row_current = 1\n        left join prd_bronze.stibo_ftp.hierarchy l3\n            on l3.parent_id = l2.id and l3.level = 3 and l3.st_row_current = 1\n        left join prd_bronze.stibo_ftp.hierarchy l4\n            on l4.parent_id = l3.id and l4.level = 4 and l4.st_row_current = 1\n        where l1.level = 1\n            and l1.st_row_current = 1\n    )\n\nselect *\nfrom base b\ninner join hierarchy h\non b.category_l4_id = h.`Level 4 ID`\nwhere h.`Level 4 ID` is not null"
+  },
+  "cleaning": {
+    "cleaning_method": "cleaning_method_20261015",
+    "code_sha256": "3817a1784311b3be",
+    "settings": {
+      "name": "cleaning_method_20261015",
+      "lists": {
+        "units": "units.txt",
+        "colors": "colors.txt",
+        "color_abbrevs": "color_abbrevs.txt",
+        "sizes": "sizes.txt",
+        "good_tokens": "good_tokens_20261008.csv"
+      },
+      "english_words_file": null,
+      "field_width": 24,
+      "repair_min_count": 3,
+      "markers": [
+        "(DV)",
+        "[DV]",
+        "(DC)",
+        "[DC]",
+        "(BP)",
+        "(R-*)"
+      ],
+      "keep_word_forms": true,
+      "keep_measurements": true,
+      "keep_common_words": 50,
+      "punctuation_mode": "delete",
+      "min_word_descriptions": 5,
+      "collapse_placeholders": [
+        "<SIZE>",
+        "<COLOR>"
+      ]
+    },
+    "list_files": [
+      "color_abbrevs.txt",
+      "colors.txt",
+      "good_tokens_20261008.csv",
+      "sizes.txt",
+      "units.txt"
+    ],
+    "n_units": 92,
+    "n_colors": 67,
+    "n_sizes": 102,
+    "n_good_tokens": 590,
+    "english_words": 234377,
+    "vocabulary_size": 27241,
+    "append_fields": {},
+    "append_nulls_as_none": true
+  }
+}

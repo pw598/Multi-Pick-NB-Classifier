@@ -1,0 +1,11 @@
+pandas>=2.0
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.3
+joblib>=1.3
+pyarrow>=12.0
+pyyaml>=6.0
+matplotlib>=3.7
+nltk>=3.8          # also installed automatically by nbclassifier/bootstrap.py if missing
+mlflow>=2.8        # optional; preinstalled on Databricks. Set USE_MLFLOW = False to skip
+pytest>=7          # tests only

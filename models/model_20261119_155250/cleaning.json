@@ -1,0 +1,49 @@
+{
+  "cleaning_method": "cleaning_method_20261015",
+  "code_sha256": "3817a1784311b3be",
+  "settings": {
+    "name": "cleaning_method_20261015",
+    "lists": {
+      "units": "units.txt",
+      "colors": "colors.txt",
+      "color_abbrevs": "color_abbrevs.txt",
+      "sizes": "sizes.txt",
+      "good_tokens": "good_tokens_20261008.csv"
+    },
+    "english_words_file": null,
+    "field_width": 24,
+    "repair_min_count": 3,
+    "markers": [
+      "(DV)",
+      "[DV]",
+      "(DC)",
+      "[DC]",
+      "(BP)",
+      "(R-*)"
+    ],
+    "keep_word_forms": true,
+    "keep_measurements": true,
+    "keep_common_words": 50,
+    "punctuation_mode": "delete",
+    "min_word_descriptions": 5,
+    "collapse_placeholders": [
+      "<SIZE>",
+      "<COLOR>"
+    ]
+  },
+  "list_files": [
+    "color_abbrevs.txt",
+    "colors.txt",
+    "good_tokens_20261008.csv",
+    "sizes.txt",
+    "units.txt"
+  ],
+  "n_units": 92,
+  "n_colors": 67,
+  "n_sizes": 102,
+  "n_good_tokens": 590,
+  "english_words": 234377,
+  "vocabulary_size": 27241,
+  "append_fields": {},
+  "append_nulls_as_none": true
+}

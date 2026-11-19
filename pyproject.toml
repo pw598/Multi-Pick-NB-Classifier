@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nbclassifier"
+version = "1.0.0"
+description = "Hierarchical multinomial naive Bayes product-category classifier"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "joblib>=1.3",
+    "pyarrow>=12.0",
+    "pyyaml>=6.0",
+    "matplotlib>=3.7",
+    "nltk>=3.8",
+]
+
+[project.optional-dependencies]
+tracking = ["mlflow>=2.8"]
+test = ["pytest>=7"]
+
+[tool.setuptools]
+packages = ["nbclassifier"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

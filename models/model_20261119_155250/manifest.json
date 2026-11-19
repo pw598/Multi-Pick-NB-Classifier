@@ -1,0 +1,80 @@
+{
+  "created_utc": "2026-11-19T15:53:52+00:00",
+  "folder": "model_20261119_155250",
+  "fingerprint": "88c327c1c879788e",
+  "level_columns": [
+    "Level 1 ID",
+    "Level 2 ID",
+    "Level 3 ID",
+    "Level 4 ID"
+  ],
+  "n_features": 185832,
+  "n_paths": 3647,
+  "classes_per_level": {
+    "Level 1 ID": 23,
+    "Level 2 ID": 155,
+    "Level 3 ID": 730,
+    "Level 4 ID": 3647
+  },
+  "n_training_rows": 605140,
+  "prediction_mode": "conditional",
+  "hyperparameters": {
+    "vectorizer_kind": "tfidf",
+    "max_features": null,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_df": 0.95,
+    "stop_words": "english",
+    "sublinear_tf": true,
+    "binary": true,
+    "norm": "l2",
+    "use_idf": false,
+    "ordered_bigrams": true,
+    "token_pattern": "whitespace",
+    "alpha": 0.001,
+    "fit_prior": true,
+    "prediction_mode": "conditional",
+    "rare_path_threshold": 5
+  },
+  "cleaning_method": "cleaning_method_20261015",
+  "versions": {
+    "nbclassifier": "1.0.0",
+    "scikit-learn": "1.1.1",
+    "numpy": "1.23.5",
+    "scipy": "1.10.0",
+    "pandas": "1.5.3"
+  },
+  "notes": "",
+  "calibration": {
+    "temperatures": [
+      1.6291242253210347,
+      1.7632619252183583,
+      1.7451559562727885,
+      1.8428850873284512
+    ],
+    "n_tables": 34,
+    "scheme": "logit",
+    "evaluation": "evaluation_20261119_150929",
+    "candidate": 0
+  },
+  "files": {
+    "vectorizer": "vectorizer.pkl",
+    "model_Level_1_ID": "model_Level_1_ID.pkl",
+    "model_Level_2_ID": "model_Level_2_ID.pkl",
+    "model_Level_3_ID": "model_Level_3_ID.pkl",
+    "model_Level_4_ID": "model_Level_4_ID.pkl",
+    "path_index": "path_index.pkl",
+    "cleaner": "cleaner.pkl",
+    "cleaning_method": "cleaning_method_20261015",
+    "vocabulary": "vocabulary.txt",
+    "hierarchy_lookup": "hierarchy_lookup.csv",
+    "hyperparameters": "hyperparameters.json",
+    "cleaning": "cleaning.json",
+    "training_data": "training_data.json",
+    "calibration": "calibration.json",
+    "manifest": "manifest.json"
+  }
+}

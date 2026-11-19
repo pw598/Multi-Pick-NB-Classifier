@@ -1,0 +1,21 @@
+{
+  "vectorizer_kind": "tfidf",
+  "max_features": null,
+  "ngram_range": [
+    1,
+    2
+  ],
+  "min_df": 2,
+  "max_df": 0.95,
+  "stop_words": "english",
+  "sublinear_tf": true,
+  "binary": true,
+  "norm": "l2",
+  "use_idf": false,
+  "ordered_bigrams": true,
+  "token_pattern": "whitespace",
+  "alpha": 0.001,
+  "fit_prior": true,
+  "prediction_mode": "conditional",
+  "rare_path_threshold": 5
+}
